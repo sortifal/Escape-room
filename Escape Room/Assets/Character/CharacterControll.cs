@@ -13,6 +13,12 @@ public class CharacterControll : MonoBehaviour
 
     // units moved per second holding down move input
     public float moveSpeed = 2;
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     // Update is called once per frame
     private void Update()
@@ -32,11 +38,14 @@ public class CharacterControll : MonoBehaviour
 
     private void Move(float input)
     {
-        transform.Translate(Vector3.forward * input * moveSpeed);
+        rb.AddForce(transform.forward * input * moveSpeed, ForceMode.Force);
     }
 
     private void Turn(float input)
     {
-        transform.Rotate(0, input * rotationRate * Time.deltaTime, 0);
+        if (Input.GetAxis("Mouse X") < 0)
+            transform.Rotate(Vector3.up * rotationRate * Input.GetAxis("Mouse X"));
+        if (Input.GetAxis("Mouse X") > 0)
+            transform.Rotate(Vector3.up * rotationRate * Input.GetAxis("Mouse X"));
     }
 }
