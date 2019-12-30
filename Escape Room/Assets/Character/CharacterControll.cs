@@ -38,10 +38,10 @@ public class CharacterControll : MonoBehaviour
 
     private void Move(float input)
     {
-        rb.AddForce(transform.forward * input * moveSpeed, ForceMode.Force);
+        transform.Translate(Vector3.forward * input * moveSpeed);
     }
 
-    private void Turn(float input)
+        private void Turn(float input)
     {
         if (Input.GetAxis("Mouse X") < 0)
             transform.Rotate(Vector3.up * rotationRate * Input.GetAxis("Mouse X"));
